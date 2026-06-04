@@ -9,7 +9,7 @@ public class VendaModels {
     private double valorTotal;
     
     // TRANSIENT impede que o Gson salve este objeto, evitando loop infinito (StackOverflow)
-    private transient ClienteModels cliente; 
+    private ClienteModels cliente; 
     private List<ItemVendaModels> itens;
     private boolean finalizada;
 

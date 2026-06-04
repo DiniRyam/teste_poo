@@ -7,7 +7,7 @@ public class ClienteModels extends PessoaModels {
 
     private String telefone;
     private String cpf;
-    private List<VendaModels> historicoCompras;
+    private transient List<VendaModels> historicoCompras;
 
     public ClienteModels(int id, String nome, String email, String senha, String telefone, String cpf) {
         super(id, nome, email, senha, false);

@@ -1,0 +1,12 @@
+[
+  {
+    "telefone": "8499999",
+    "cpf": "000.000.000-00",
+    "id": 1,
+    "nome": "Admin Global",
+    "email": "admin@email.com",
+    "senha": "123456",
+    "ehAdministrador": false,
+    "statusDaConta": true
+  }
+]

@@ -35,8 +35,28 @@ public class App {
         produtoController = new ProdutoController(produtoService);
         vendaController = new VendaController(vendaService);
 
-        // Massa de dados inicial para testes
-        inicializarDadosFicticios();
+        // NOVIDADE: RECONSTRUIR AS LIGAÇÕES NA MEMÓRIA
+        for (VendaModels venda : vendaController.listarVendas()) {
+            if (venda.getCliente() != null) {
+                // 1. Pega o ID do cliente que está guardado dentro da venda
+                int idCliente = venda.getCliente().getId();
+                // 2. Busca o cliente real oficial na lista de clientes
+                ClienteModels clienteReal = clienteController.buscarClientePorId(idCliente);
+                
+                if (clienteReal != null) {
+                    // 3. Atualiza a venda para apontar para o cliente em memória
+                    venda.setCliente(clienteReal);
+                    // 4. Adiciona a venda ao histórico do cliente!
+                    clienteReal.getHistoricoCompras().add(venda);
+                }
+            }
+        }
+
+
+        // SÓ INICIALIZA OS DADOS FICTÍCIOS SE O JSON ESTIVER VAZIO (PRIMEIRA VEZ)
+        if (clienteController.listarClientes().isEmpty()) {
+            inicializarDadosFicticios();
+        }
 
         // 2. Loop Principal da Máquina de Estados
         while (true) {
